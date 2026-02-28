@@ -1,0 +1,44 @@
+# ---- Python tooling ----
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ---- Virtual environments ----
+.venv/
+venv/
+
+# ---- Secrets ----
+.env
+.env.*
+
+# ---- VS Code (keep project settings) ----
+.vscode/
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# ---- OS junk ----
+.DS_Store
+Thumbs.db
+
+# ---- Logs ----
+*.log
+
+# ---- Data (recommended ignore big raw files) ----
+data/
+raw_data/
+*.csv
+*.parquet
+*.xlsx
+
+# ---- Keep small samples only ----
+!data/sample_*.csv
+!raw_data/sample_*.csv
+
+# ---- DB artifacts ----
+pgdata/
+postgres-data/
+*.dump
+*.backup
