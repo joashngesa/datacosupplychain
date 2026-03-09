@@ -1,0 +1,11 @@
+		Factors concidered when creating the datacosupplychain_staging table.
+Zipcodes are TEXT (because 0725 and 725 are not the same in identifier-land).
+Money/amount fields use NUMERIC (stable; no float rounding drama).
+Dates become TIMESTAMP.
+order_item_id makes a good primary key because each row is an order line.
+
+Removed customer password and customer email columns since they were encoded from the onset.
+
+REVISED THE DATA AFRESH.
+Inspect the data in excel.
+Issues identified;
