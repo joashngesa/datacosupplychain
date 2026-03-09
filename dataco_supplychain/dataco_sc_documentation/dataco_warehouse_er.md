@@ -63,8 +63,20 @@ erDiagram
         int shipment_key FK
         int product_key FK
         int date_key FK
-        
-
-
+        int order_item_cardprod_id                            
+        numeric order_item_discount         
+        numeric order_item_discount_rate 
+        numeric benefit_per_order   
+        numeric order_item_product_price    
+        numeric order_item_profit_ratio     
+        int order_item_quantity         
+        numeric order_item_total            
+        numeric order_profit_per_order
+        numeric sales_per_customer
+        numeric sales
+        int days_for_shipment_scheduled
+        int days_for_shipping_real
+        int late_delivery_risk
+        string delivery_status 
     }
 ```
