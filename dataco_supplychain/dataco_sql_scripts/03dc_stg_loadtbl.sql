@@ -113,20 +113,17 @@ SELECT
           THEN Longitude::numeric(9,6)
         END,
         NULLIF(BTRIM(Market),''),
-        NULLIF(
-                REGEXP_REPLACE(
-                        REGEXP_REPLACE(BTRIM(Order_City),'[^[:alnum:][:space:]\-''.]','','g'),
-                        '[[:space:]]+',' ','g'),''),
-        NULLIF(
-                REGEXP_REPLACE(
-                        REGEXP_REPLACE(BTRIM(Order_Country),'[^[:alnum:][:space:]\-''.]','','g'),
-                        '[[:space:]]+',' ','g'),''),
+        NULLIF(BTRIM(REGEXP_REPLACE(Order_City,
+            '[^A-Za-z ]','','g')),''),
+        NULLIF(BTRIM(REGEXP_REPLACE(Order_Country,
+              '[^A-Za-z ]','','g')),''),
         CASE
         WHEN Order_Customer_Id ~ '^\d+$' 
           THEN Order_Customer_Id::bigint
         END,
-        TO_TIMESTAMP(BTRIM(order_date_DateOrders),'MM/DD/YYYY HH24:MI') 
-        order_date_ts,
+        TO_TIMESTAMP(NULLIF(BTRIM(order_date_DateOrders),
+            ''),'MM/DD/YYYY HH24:MI') 
+        AS order_date_ts,
         CASE
         WHEN BTRIM(Order_Id) ~ '^\d+$' 
           THEN BTRIM(Order_Id)::bigint
@@ -168,14 +165,13 @@ SELECT
           THEN BTRIM(Order_Item_Total)::numeric(12,2)
         END,
         CASE
-        WHEN BTRIM(Order_Profit_Per_Order) ~ '^-?\d(\.\d+)?$' 
+        WHEN BTRIM(Order_Profit_Per_Order) ~ '^-?\d+(\.\d+)?$' 
           THEN BTRIM(Order_Profit_Per_Order)::numeric(12,2)
+        ELSE NULL
         END,
         NULLIF(BTRIM(Order_Region),''),
-        NULLIF(
-                REGEXP_REPLACE(
-                        REGEXP_REPLACE(BTRIM(Order_state),'[^[:alnum:][:space:]\-''.]','','g'),
-                        '[[:space:]]+',' ','g'),''),
+        NULLIF(BTRIM(REGEXP_REPLACE(Order_state,
+        '[^A-Za-z ]','','g')),''),
         NULLIF(BTRIM(Order_Status),''),
         NULLIF(BTRIM(Order_Zipcode),''),
         CASE
@@ -196,7 +192,8 @@ SELECT
         WHEN btrim(Product_Status) ~ '^-?\d+$' 
           THEN btrim(Product_Status)::int 
         END,
-        TO_TIMESTAMP(BTRIM(shipping_date_DateOrders),'MM/DD/YYYY HH24:MI') 
+        TO_TIMESTAMP(NULLIF(BTRIM(shipping_date_DateOrders)
+        ,''),'MM/DD/YYYY HH24:MI') 
         AS shipping_date_ts,
         NULLIF(BTRIM(Shipping_Mode),''),
         CONCAT_WS(' | ',
