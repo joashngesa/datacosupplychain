@@ -1,6 +1,6 @@
 ```mermaid
 erDiagram
-    dim_customer {
+    DIM_CUSTOMER {
         int customer_key PK
         int customer_id
         string customer_fname
@@ -8,8 +8,8 @@ erDiagram
         string customer_segment
     }
 
-    dim_customer_location {
-        int location_key PK
+    DIM_CUSTOMER_LOCATION {
+        int customer_location_key PK
         string customer_country
         string customer_state
         string customer_city
@@ -17,7 +17,7 @@ erDiagram
         numeric latitude
         numeric longitude
     }
-    dim_order_location {
+    DIM_ORDER_LOCATION {
         int order_location_key PK
         string order_country
         string order_region
@@ -25,44 +25,46 @@ erDiagram
         string order_zipcode
         string market
     }
-    dim_category {
+    DIM_CATEGORY {
         int category_key PK
         int category_id
         string category_name
         string department_id
         string department_name
     }
-    dim_shipment  {
+    DIM_SHIPMENT  {
         int shipment_key PK
         string shipping_mode
     }
-    dim_products {
+    DIM_PRODUCT {
         int product_key PK
+        int category_key FK
         int product_card_id
         int product_category_id
         string product_name
         int product_price
-        product_status
+        int product_status
     }
-    dim_date {
+    DIM_DATE {
         int date_key PK
         int full_date
         boolean is_weekend
-        int day_of_month
+        int day_of_week
         int day_of_month
         int month
         string month_name
         int quarter
         int year
     }
-    fact_order_item {
+    FACT_ORDER_ITEM {
         int order_item_id PK
         int order_id
         int customer_key FK
         int location_key FK
         int shipment_key FK
         int product_key FK
-        int date_key FK
+        int order_date_key FK
+        int shipping_date_key FK 
         int order_item_cardprod_id                            
         numeric order_item_discount         
         numeric order_item_discount_rate 
@@ -79,4 +81,11 @@ erDiagram
         int late_delivery_risk
         string delivery_status 
     }
+DIM_CUSTOMER ||--o{FACT_ORDER_ITEM: places
+DIM_CUSTOMER_LOCATION ||--o{FACT_ORDER_ITEM: resides_in
+DIM_ORDER_LOCATION ||--o{FACT_ORDER_ITEM: occurs_in
+DIM_SHIPMENT ||--o{FACT_ORDER_ITEM: ship_by
+DIM_PRODUCTS ||--o{FACT_ORDER_ITEM : appears_in
+DIM_DATE ||--o{FACT_ORDER_ITEM: occurs_on
+DIM_CATEGORY ||--o{DIM_PRODUCTS: classifies
 ```
