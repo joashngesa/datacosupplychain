@@ -1,4 +1,5 @@
 --insert into the clean table from the raw table to the staging schema
+--row count:180519
 
 INSERT INTO staging.dataco_supplychain_stg(
         record_type,

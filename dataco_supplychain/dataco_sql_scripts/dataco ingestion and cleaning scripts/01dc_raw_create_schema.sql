@@ -1,8 +1,9 @@
 --This is is the first table created to import data into postgres;
 --it goes into the raw schema.
+--row count:180519
 
 CREATE TABLE IF NOT EXISTS raw.dataco_supplychain_raw (
-        Type TEXT,
+        "Type" TEXT,
         Days_for_shipping_real TEXT,
         Days_for_shipment_scheduled TEXT,
         Benefit_per_order TEXT,

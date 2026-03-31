@@ -60,7 +60,6 @@ LEFT JOIN core.dim_order_location AS dol
     ON dsc.order_country=dol.order_country
     AND dsc.order_region=dol.order_region
     AND dsc.order_city=dol.order_city
-    AND dsc.order_zipcode=dol.order_zipcode
 LEFT JOIN core.dim_shipment AS dsp
     ON dsc.shipping_mode=dsp.shipping_mode
 LEFT JOIN core.dim_product AS dpd

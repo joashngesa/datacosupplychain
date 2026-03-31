@@ -23,7 +23,6 @@ CREATE TABLE IF NOT EXISTS core.dim_order_location(
     order_country TEXT,
     order_region TEXT,
     order_city TEXT,
-    order_zipcode TEXT,
     market TEXT
 );
 

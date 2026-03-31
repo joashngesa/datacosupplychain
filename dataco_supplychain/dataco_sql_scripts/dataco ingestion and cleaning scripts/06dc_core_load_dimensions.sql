@@ -72,14 +72,12 @@ INSERT INTO core.dim_order_location(
     order_country,
     order_region,
     order_city,
-    order_zipcode,
     market
 )
 SELECT DISTINCT
     order_country,
     order_region,
     order_city,
-    order_zipcode,
     market
 FROM staging.dataco_supplychain_stg;
 
