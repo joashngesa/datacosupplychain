@@ -12,8 +12,9 @@
 
 --1. Revenue?
 
-SELECT SUM(sales)
-FROM core.fact_order_item ;
-
---2. Profit
-
+SELECT 
+    SUM(sales) AS total revenue,
+    order_item_profit_ratio * sales AS profit,
+    COUNT(DISTINCT order_id) AS total orders,
+    SUM(order_item_quantity) AS total_quantity,
+    
